@@ -26,8 +26,8 @@
     <link rel="stylesheet" href="{{ asset('front') }}/css/main.css">
 
     <!--[if lt IE 9]>
-    <script src="js/html5shiv.min.js"></script>
-    <script src="js/respond.min.js"></script>
+    <script src="{{ asset('front') }}/js/html5shiv.min.js"></script>
+    <script src="{{ asset('front') }}/js/respond.min.js"></script>
     <![endif]-->
 
 </head>
@@ -52,7 +52,7 @@
 <header>
     <div class="site-brand text-center">
         <div class="container">
-            <a href="index.html">
+            <a href="{{route('home')}}">
                 <img src="{{Voyager::image(setting('site.logo'))}}" width="200" alt="{{setting('site.title')}}">
             </a>
             <p class="site-description">{{setting('site.front_desc')}}</p>

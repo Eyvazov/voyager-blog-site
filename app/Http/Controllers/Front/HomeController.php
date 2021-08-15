@@ -18,7 +18,7 @@ class HomeController extends Controller
         })->whereHas('category', function ($query)
         {
             $query->where('status', 1);
-        })->paginate(5);
+        })->paginate(setting('site.pagination'));
         $categories = Category::where('status', '1')->orderBy('order', 'ASC')->get();
         $socialNetworks = SocialNetwork::all();
         return view('front.index', compact('socialNetworks', 'categories', 'posts'));

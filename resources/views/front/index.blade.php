@@ -19,7 +19,7 @@
                                 <div class="post-item">
                                     <div class="post-thumbnail">
                                         <a href="single.html">
-                                            <img class="img-responsive" src="{{Voyager::image($post->image)}}" alt="" >
+                                            <img class="img-responsive" src="{{Voyager::image($post->image) ? Voyager::image($post->image) : Voyager::image('posts/images.png')}}" width="100%" alt="{{$post->title}}" >
                                         </a>
                                     </div>
                                     <div class="post-category">
@@ -64,13 +64,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="pagination-numbers">
-                        <span aria-current="page" class="page-numbers current">1</span>
-                        <a class="page-numbers" href="#">2</a>
-                        <a class="page-numbers" href="#">3</a>
-                        <a class="page-numbers" href="#">4</a>
-                        <a class="next page-numbers" href="#">
-                            <span class="fa fa-angle-right"></span>
-                        </a>
+                        {{$posts->links('front.widgets.paginator')}}
                     </div>
                 </div>
                 @include('front.layouts.sidebar')

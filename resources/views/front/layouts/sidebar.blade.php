@@ -1,9 +1,10 @@
 <div class="col-md-4 col-sm-12">
     <div class="sidebar">
         <div class="widget about-widget">
-            <h3 class="widget-title">About Me</h3>
+            <h3 class="widget-title">{{__('Haqqımda')}}</h3>
+            {{print_r($about)}}
             <div class="author-image">
-                <img class="img-responsive" src="https://via.placeholder.com/251x251" alt="" height="107" width="107">
+                <img class="img-responsive" src="" alt="" height="107" width="107">
             </div>
             <div class="author-info">
                 <h3 class="author-name">Hi I'm <span>Leila Smith</span></h3>
@@ -15,72 +16,34 @@
             @foreach($categories as $category)
                 <div class="category-item">
                     <a href="{{$category['slug']}}">{{$category['name']}}</a>
-                    <span class="count">(4)</span>
+                    <span class="count">({{$category->postCount()}})</span>
                 </div>
             @endforeach
         </div>
         <div class="widget recent-posts-widget">
-            <h3 class="widget-title">Recent Posts</h3>
-            <div class="recent-post-item">
-                <div class="recent-post-widget-thumbnail">
-                    <a href="single.html">
-                        <img class="img-responsive" src="https://via.placeholder.com/1170x780" alt="" >
-                    </a>
-                </div>
-                <div class="recent-post-widget-content">
-                    <h4 class="recent-post-widget-title">
-                        <a href="single.html">How To Dress in Red Style</a>
-                    </h4>
-                    <div class="recent-post-widget-info">
+            <h3 class="widget-title">{{__('Son Yazılar')}}</h3>
+            @foreach($posts as $post)
+                <div class="recent-post-item">
+                    <div class="recent-post-widget-thumbnail">
+                        <a href="single.html">
+                            <img class="img-responsive" src="{{Voyager::image($post->image) ? Voyager::image($post->image) : Voyager::image('posts/images.png')}}" width="100%" alt="" >
+                        </a>
+                    </div>
+                    <div class="recent-post-widget-content">
+                        <h4 class="recent-post-widget-title">
+                            <a href="single.html">{{$post->title}}</a>
+                        </h4>
+                        <div class="recent-post-widget-info">
 										     <span class="author">
-											     <a href="author.html">Leila Smith</a>
+											     <a href="author.html">{{$post->authorId->name}}</a>
 										     </span>
-                        <span class="date">
-											     <a href="archive.html">October 21, 2020</a>
+                            <span class="date">
+											     <a href="archive.html">{{$post->created_at->diffForHumans()}}</a>
 										     </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="recent-post-item">
-                <div class="recent-post-widget-thumbnail">
-                    <a href="single.html">
-                        <img class="img-responsive" src="https://via.placeholder.com/1170x780" alt="" >
-                    </a>
-                </div>
-                <div class="recent-post-widget-content">
-                    <h4 class="recent-post-widget-title">
-                        <a href="single.html">Awesome Breathtaking Places</a>
-                    </h4>
-                    <div class="recent-post-widget-info">
-										     <span class="author">
-											     <a href="author.html">Leila Smith</a>
-										     </span>
-                        <span class="date">
-											     <a href="archive.html">October 21, 2020</a>
-										     </span>
-                    </div>
-                </div>
-            </div>
-            <div class="recent-post-item">
-                <div class="recent-post-widget-thumbnail">
-                    <a href="single.html">
-                        <img class="img-responsive" src="https://via.placeholder.com/1170x780" alt="" >
-                    </a>
-                </div>
-                <div class="recent-post-widget-content">
-                    <h4 class="recent-post-widget-title">
-                        <a href="single.html">5 Easy Party Dessert Recipes</a>
-                    </h4>
-                    <div class="recent-post-widget-info">
-										   <span class="author">
-											   <a href="author.html">Leila Smith</a>
-										   </span>
-                        <span class="date">
-											   <a href="archive.html">October 21, 2020</a>
-										   </span>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <div class="widget newsletter">
             <div class="widget widget_mc4wp_form_widget">
@@ -111,13 +74,11 @@
             </ul>
         </div>
         <div class="widget follow-widget">
-            <h3 class="widget-title">Follow Us</h3>
+            <h3 class="widget-title">{{__('BİZİ İZLƏYİN')}}</h3>
             <ul class="social-icons-menu list-unstyled">
-                <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                <li><a href="#" target="_blank"><i class="fa fa-pinterest"></i></a></li>
-                <li><a href="#" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                @foreach($socialNetworks as $social)
+                    <li><a href="{{$social->social_network_url}}" target="_blank"><i class="{{$social->social_network_icon}}"></i></a></li>
+                @endforeach
             </ul>
         </div>
     </div>
